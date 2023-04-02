@@ -1436,7 +1436,7 @@ static int video_open(VideoState *is, int force_set_video_mode)
 		do_exit(is);
 	}
 	//注意：设置视频窗口标题！
-	window_title="Video Window";
+	window_title="Video Window yy";
 	if (!window_title)
 		window_title = input_filename;
 	SDL_WM_SetCaption(window_title, window_title);
@@ -4091,10 +4091,10 @@ int ve_play(LPVOID lpParam)
 	if (display_disable)
 		SDL_putenv(dummy_videodriver); /* For the event queue, we always need a video driver. */
 #else
-	char sdl_var[128]; 
+	//char sdl_var[128]; 
 	//sprintf(sdl_var, "SDL_WINDOWID=0x%lx", hWnd );//主窗口句柄 
-	SDL_putenv(sdl_var); 
-	char *myvalue = SDL_getenv("SDL_WINDOWID");
+	//SDL_putenv(sdl_var); 
+	//char *myvalue = SDL_getenv("SDL_WINDOWID");
 #endif
 
 #if !defined(__MINGW32__) && !defined(__APPLE__)
