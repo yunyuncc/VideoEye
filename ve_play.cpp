@@ -1124,7 +1124,7 @@ static void video_image_display(VideoState *is)
 
 	vp = &is->pictq[is->pictq_rindex];
 	if (vp->bmp) {
-		if (is->subtitle_st) {
+		if (is->subtitle_st) {//混合字幕
 			if (is->subpq_size > 0) {
 				sp = &is->subpq[is->subpq_rindex];
 
@@ -1153,7 +1153,7 @@ static void video_image_display(VideoState *is)
 		}else if(is_stretch==1){
 			calculate_display_rect_f(&rect, is->xleft, is->ytop, is->width, is->height, vp);
 		}
-		SDL_DisplayYUVOverlay(vp->bmp, &rect);
+		SDL_DisplayYUVOverlay(vp->bmp, &rect);//将图片绘制到SDL窗口
 	}
 }
 
