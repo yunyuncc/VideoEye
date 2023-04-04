@@ -100,8 +100,8 @@ long  rint_1(double x)
 typedef struct VideoPicture {
 	double pts;                                  ///< presentation time stamp for this picture
 	int64_t pos;                                 ///< byte position in file
-	int skip;
-	SDL_Overlay *bmp;
+	int skip;				//用来标记是否跳帧 (谁读？谁写？)
+	SDL_Overlay *bmp;		// 用来显示的，解码后的一帧画面
 	int width, height; /* source height & width */
 	AVRational sample_aspect_ratio;
 	int allocated;
@@ -1577,7 +1577,7 @@ static double compute_target_delay(double delay, VideoState *is)
 
 	return delay;
 }
-
+// 读索引前进一格，跳过这一帧
 static void pictq_next_picture(VideoState *is) {
 	/* update queue size and signal for next picture */
 	if (++is->pictq_rindex == VIDEO_PICTURE_QUEUE_SIZE)
@@ -1588,7 +1588,7 @@ static void pictq_next_picture(VideoState *is) {
 	SDL_CondSignal(is->pictq_cond);
 	SDL_UnlockMutex(is->pictq_mutex);
 }
-
+// 读索引回退一格，将之前读过的一帧再次标记为可读（如果前一帧是合法的）
 static void pictq_prev_picture(VideoState *is) {
 	VideoPicture *prevvp;
 	/* update queue size and signal for the previous picture */

@@ -16,6 +16,7 @@ event_loop
             video_image_display
 
 queue_picture 会往pictq 里面丢数据
+alloc_picture 会更新pictq里面的数据， 给当前写的一帧，申请bmp内存（要显示的图片）
 
 
 视频解码线程主函数
